@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poetsen+One&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  /* overflow: hidden; */
+}
+
+header {
+  background: red;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem 0rem;
+}
+
+.cart-icon {
+  font-size: 1.8rem;
+}
+
+.cart-btn {
+  border: none;
+  outline: none;
+  background: transparent;
+  /* background: skyblue; */
+  /* padding: 1rem 2rem; */
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.cart-item {
+  position: absolute;
+  background: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  color: red;
+  top: -0.2rem;
+  right: 0.1rem;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.summery {
+  background: green;
+  text-align: center;
+  padding: 1rem;
+}
+
+.summery h2 {
+  background: red;
+  margin-bottom: 1rem;
+  font-style: italic;
+  letter-spacing: 0.2px;
+  word-spacing: 0.2rem;
+}
+.summery p {
+  background: yellow;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  line-height: 1.4rem;
+  text-align: start;
+}
+
+.body {
+  background: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0rem;
+}
+
+.card {
+  width: 80%;
+  background: #fff480;
+  color: black;
+  position: relative;
+  border-radius: 1em;
+  padding: 1.2em;
+  transition: transform 0.4s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card span {
+  position: absolute;
+  top: -5.3%;
+  left: -0.7%;
+  background: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .card-item p {
+} */
+
+.card .card-top p,
+.card .card-top .card-title,
+.card .card-bottom p,
+.card .card-bottom .card-title {
+  margin: 0;
+}
+
+.card .card-title {
+  font-weight: bold;
+}
+
+.card .card-top p,
+.card .card-bottom p {
+  font-weight: 600;
+}
+
+.card .card-bottom {
+  align-items: flex-end;
+}
+
+.active.card:active {
+  transform: scale(0.9);
+}
+
+.add-to-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-to-cart input {
+  border: 2px solid transparent;
+  width: 6rem;
+  height: 2.5em;
+  padding-left: 0.8em;
+  outline: none;
+  overflow: hidden;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  transition: all 0.5s;
+}
+
+.add-to-cart input:hover {
+  border: 2px solid #14a73e98;
+  box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+  background-color: white;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(
+    0deg,
+    rgba(20, 167, 62, 1) 0%,
+    rgba(102, 247, 113, 1) 100%
+  );
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+  cursor: pointer;
+}
+
+.add-btn svg {
+  margin-right: 6px;
+}
+.add-btn:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
+}
+
+.add-btn:active {
+  box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+}
+
+.modal {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+  z-index: 1000;
+  transition: all 0.5s;
+}
