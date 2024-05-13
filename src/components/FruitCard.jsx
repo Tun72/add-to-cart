@@ -9,7 +9,7 @@ function FruitCard({ fruit: { id, name, description, price } }) {
         <p>{description}</p>
         <p>${price}</p>
       </div>
-      <AddtoCart />
+      <AddtoCart name={name} price={price} id={id} />
     </Card>
   );
 }

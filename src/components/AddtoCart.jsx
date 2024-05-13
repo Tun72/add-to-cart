@@ -1,7 +1,30 @@
-function AddtoCart() {
+import { useState } from "react";
+import { useCart } from "../context/CartContext";
+
+function AddtoCart({ name, id, price }) {
+  const [quantity, setQuantity] = useState(1);
+  const { addItem } = useCart();
+  function handelSubmit(e) {
+    e.preventDefault();
+    const item = {
+      name,
+      id,
+      price,
+      quantity,
+      totalPrice: price * quantity,
+    };
+
+    addItem(item);
+  }
   return (
-    <div className="add-to-cart">
-      <input type="number" name="" id="" />
+    <form className="add-to-cart" onSubmit={handelSubmit}>
+      <input
+        type="number"
+        value={quantity}
+        onChange={(e) => {
+          setQuantity(e.target.value);
+        }}
+      />
       <button className="add-btn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +40,7 @@ function AddtoCart() {
         </svg>
         Add
       </button>
-    </div>
+    </form>
   );
 }
 

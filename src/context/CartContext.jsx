@@ -20,10 +20,8 @@ function reducer(state, action) {
       return { ...state, items: state.item };
     case "cart/decrese":
       let item2 = state.item.find((item) => item.id === action.id);
-      
       item2.quantity--;
       item2.total = item2.quantity * item2.price;
-        
       return { ...state, items: state.item };
     default:
       return state;
@@ -34,11 +32,25 @@ function reducer(state, action) {
 const CartContext = createContext();
 
 export default function CartProvider({ children }) {
-  const [{}, dispatch] = useReducer(reducer, initailState);
+  const [{ items, totalAmount }, dispatch] = useReducer(reducer, initailState);
+
+  function addItem(item) {
+    console.log(item);
+    dispatch({ type: "cart/add", payload: item });
+  }
+
+  function removeItem(id) {
+    dispatch({ type: "cart/remove", payload: id });
+  }
+
   return (
     <CartContext.Provider
       value={{
+        items,
+        totalAmount,
         dispatch,
+        addItem,
+        removeItem,
       }}
     >
       {children}
