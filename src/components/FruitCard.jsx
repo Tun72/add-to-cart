@@ -1,7 +1,25 @@
-import AddtoCart from "./AddtoCart";
+import { useState } from "react";
 import Card from "./Card";
+import { useCart } from "../context/CartContext";
+import UpdateCart from "./UpdateCart";
+import Button from "./Button";
 
 function FruitCard({ fruit: { id, name, description, price } }) {
+  const [quantity, setQuantity] = useState(1);
+  const { addItem, getCurrentQuantityById } = useCart();
+  const itemQuantity = getCurrentQuantityById(id);
+  function handelSubmit(e) {
+    e.preventDefault();
+    const item = {
+      name,
+      id,
+      price,
+      quantity,
+      totalPrice: price * quantity,
+    };
+    addItem(item);
+  }
+
   return (
     <Card id={id}>
       <div className="card-item">
@@ -9,7 +27,20 @@ function FruitCard({ fruit: { id, name, description, price } }) {
         <p>{description}</p>
         <p>${price}</p>
       </div>
-      <AddtoCart name={name} price={price} id={id} />
+      {itemQuantity ? (
+        <UpdateCart itemQuantity={itemQuantity}  id={id} />
+      ) : (
+        <form className="add-to-cart" onSubmit={handelSubmit}>
+          <input
+            type="number"
+            value={quantity}
+            onChange={(e) => {
+              setQuantity(e.target.value);
+            }}
+          />
+          <Button type={"add"} />
+        </form>
+      )}
     </Card>
   );
 }

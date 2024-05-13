@@ -1,28 +1,51 @@
+import { type } from "@testing-library/user-event/dist/type";
 import { createContext, useContext, useReducer } from "react";
 
 // reducer part
 const initailState = {
   items: [],
-  totalAmount: 0,
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case "cart/add":
-      return { ...state, items: [...state.items, action.payload] };
+      return {
+        ...state,
+        items: [...state.items, action.payload],
+      };
     case "cart/remove":
-      let items = state.item.filter((item) => item.id !== action.payload);
-      return { ...state, items };
+      return {
+        ...state,
+        items: state.item.filter((item) => item.id !== action.payload),
+      };
     case "cart/increase":
-      let item = state.item.find((item) => item.id === action.id);
-      item.quantity++;
-      item.total = item.quantity * item.price;
-      return { ...state, items: state.item };
-    case "cart/decrese":
-      let item2 = state.item.find((item) => item.id === action.id);
-      item2.quantity--;
-      item2.total = item2.quantity * item2.price;
-      return { ...state, items: state.item };
+      return {
+        ...state,
+        items: state.items.map((item) =>
+          item.id === action.payload
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+                totalPrice: (item.quantity + 1) * item.price,
+              }
+            : { ...item }
+        ),
+      };
+    case "cart/decrease":
+      return {
+        ...state,
+        items: state.items
+          .map((item) =>
+            item.id === action.payload
+              ? {
+                  ...item,
+                  quantity: item.quantity - 1,
+                  totalPrice: (item.quantity - 1) * item.price,
+                }
+              : { ...item }
+          )
+          .filter((item) => item.quantity !== 0),
+      };
     default:
       return state;
   }
@@ -32,10 +55,9 @@ function reducer(state, action) {
 const CartContext = createContext();
 
 export default function CartProvider({ children }) {
-  const [{ items, totalAmount }, dispatch] = useReducer(reducer, initailState);
+  const [{ items }, dispatch] = useReducer(reducer, initailState);
 
   function addItem(item) {
-    console.log(item);
     dispatch({ type: "cart/add", payload: item });
   }
 
@@ -43,14 +65,35 @@ export default function CartProvider({ children }) {
     dispatch({ type: "cart/remove", payload: id });
   }
 
+  function increaseItem(id) {
+    dispatch({ type: "cart/increase", payload: id });
+  }
+
+  function decreaseItem(id) {
+
+    dispatch({ type: "cart/decrease", payload: id });
+  }
+
+  const getTotalAmount = () =>
+    items.reducer((prev, current) => prev + current.totalAmount, 0);
+
+  const getCurrentQuantityById = (id) =>
+    items.find((item) => item.id === id)?.quantity ?? 0;
+
+  const itemsLength = items.length;
+
   return (
     <CartContext.Provider
       value={{
         items,
-        totalAmount,
+        itemsLength,
+        getTotalAmount,
         dispatch,
         addItem,
         removeItem,
+        increaseItem,
+        decreaseItem,
+        getCurrentQuantityById,
       }}
     >
       {children}
