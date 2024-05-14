@@ -25,7 +25,7 @@ function Cart({ onClose }) {
 
       <div className="cart-header">
         <h2 className="cart-heading">Your Cart</h2>
-        {itemsLength && <p>Total💰- ${totalAmount}</p>}
+        {!!itemsLength && <p>Total💰- ${totalAmount.toFixed(2)}</p>}
       </div>
 
       {itemsLength ? (
