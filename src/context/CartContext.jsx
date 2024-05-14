@@ -16,7 +16,7 @@ function reducer(state, action) {
     case "cart/remove":
       return {
         ...state,
-        items: state.item.filter((item) => item.id !== action.payload),
+        items: state.items.filter((item) => item.id !== action.payload),
       };
     case "cart/increase":
       return {
@@ -46,6 +46,11 @@ function reducer(state, action) {
           )
           .filter((item) => item.quantity !== 0),
       };
+    case "cart/clear":
+      return {
+        ...state,
+        items: [],
+      };
     default:
       return state;
   }
@@ -70,8 +75,11 @@ export default function CartProvider({ children }) {
   }
 
   function decreaseItem(id) {
-
     dispatch({ type: "cart/decrease", payload: id });
+  }
+
+  function clearCart(id) {
+    dispatch({ type: "cart/clear" });
   }
 
   const getTotalAmount = () =>
@@ -88,11 +96,11 @@ export default function CartProvider({ children }) {
         items,
         itemsLength,
         getTotalAmount,
-        dispatch,
         addItem,
         removeItem,
         increaseItem,
         decreaseItem,
+        clearCart,
         getCurrentQuantityById,
       }}
     >

@@ -28,14 +28,16 @@ function FruitCard({ fruit: { id, name, description, price } }) {
         <p>${price}</p>
       </div>
       {itemQuantity ? (
-        <UpdateCart itemQuantity={itemQuantity}  id={id} />
+        <>
+          <UpdateCart itemQuantity={itemQuantity} id={id} />
+        </>
       ) : (
         <form className="add-to-cart" onSubmit={handelSubmit}>
           <input
             type="number"
             value={quantity}
             onChange={(e) => {
-              setQuantity(e.target.value);
+              setQuantity(Number(e.target.value));
             }}
           />
           <Button type={"add"} />

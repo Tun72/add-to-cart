@@ -1,9 +1,15 @@
 import ReactDOM from "react-dom";
-function Modal({ children, onClose }) {
-
+import { ImCross } from "react-icons/im";
+function Modal({ children, onClose, onRef }) {
   return ReactDOM.createPortal(
     <div className="modal">
-      {children}
+      <div className="cart-data" ref={onRef}>
+        <h2 className="cart-heading">Your Cart</h2>
+        <button className="close-cart" onClick={onClose}>
+          <ImCross />
+        </button>
+        {children}
+      </div>
     </div>,
     document.getElementById("portal")
   );

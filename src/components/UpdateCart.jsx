@@ -2,7 +2,7 @@ import { useCart } from "../context/CartContext";
 import Button from "./Button";
 
 function UpdateCart({ itemQuantity, id }) {
-  const { increaseItem, decreaseItem } = useCart();
+  const { increaseItem, decreaseItem, } = useCart();
 
   return (
     <div className="increase-decrease">

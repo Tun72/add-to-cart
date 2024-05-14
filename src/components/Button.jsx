@@ -1,6 +1,6 @@
 import { HiMinus, HiPlus } from "react-icons/hi";
 
-function Button({ type, onClick }) {
+function Button({ children, type, onClick, color = "", size = "" }) {
   const content = {
     add: (
       <>
@@ -10,6 +10,14 @@ function Button({ type, onClick }) {
     increase: <HiPlus />,
     decrease: <HiMinus />,
   };
+
+  if (!type) {
+    return (
+      <button onClick={onClick} className={`btn ${color} ${size}`}>
+        {children}
+      </button>
+    );
+  }
   return (
     <button className={`btn ${type}`} onClick={onClick}>
       {content[type]}
