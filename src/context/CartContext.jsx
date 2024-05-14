@@ -83,7 +83,7 @@ export default function CartProvider({ children }) {
   }
 
   const getTotalAmount = () =>
-    items.reducer((prev, current) => prev + current.totalAmount, 0);
+    items.reduce((prev, current) => prev + current.totalPrice, 0);
 
   const getCurrentQuantityById = (id) =>
     items.find((item) => item.id === id)?.quantity ?? 0;

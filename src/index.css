@@ -354,10 +354,25 @@ header {
   color: #fff;
 }
 
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  /* margin-top: 1rem; */
+}
+
+.cart-header p{
+  color: #ad5389;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+ 
+}
 .cart-heading {
   color: #ad5389;
   font-style: italic;
-  margin-bottom: 1rem;
+ 
   font-weight: 600;
   font-size: 1.4rem;
 }

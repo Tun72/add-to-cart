@@ -8,7 +8,8 @@ import Button from "./Button";
 function Cart({ onClose }) {
   const ref = useOutsideClick(onClose);
 
-  const { items, itemsLength, clearCart } = useCart();
+  const { items, itemsLength, clearCart, getTotalAmount } = useCart();
+  const totalAmount = getTotalAmount();
 
   function handelOrder() {
     alert("successfully ordered!✅");
@@ -16,12 +17,17 @@ function Cart({ onClose }) {
 
   function handelCLearCart() {
     const isClear = window.confirm("Are u sure ?");
-
     if (isClear) clearCart();
   }
 
   return (
     <Modal onClose={onClose} onRef={ref}>
+
+      <div className="cart-header">
+        <h2 className="cart-heading">Your Cart</h2>
+        {itemsLength && <p>Total💰- ${totalAmount}</p>}
+      </div>
+
       {itemsLength ? (
         <>
           <ul className="orderlist">
